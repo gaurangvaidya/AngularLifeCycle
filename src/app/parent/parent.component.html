@@ -1,0 +1,7 @@
+
+<select name="role" id="role" #role="ngModel" ngModel>
+    <option *ngFor="let rae of roleandemployee.roleArray" [value]="rae.roleId">{{rae.roleName}}</option>
+</select>
+
+ <app-child  [roleId]="role.value"></app-child>
+
