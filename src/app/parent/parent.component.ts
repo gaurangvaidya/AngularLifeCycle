@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/model/Role';
 import { RoleandemployeeService } from '../roleandemployee.service';
 
 @Component({
@@ -9,11 +10,24 @@ import { RoleandemployeeService } from '../roleandemployee.service';
 })
 export class ParentComponent implements OnInit {
 
-  role:any;
+  role:Role= new Role();
 
-  constructor(public roleandemployee:RoleandemployeeService) { }
+  roleArray:Role[] = [];
+  constructor(public service:RoleandemployeeService) { }
 
   ngOnInit(): void {
+
+    
+    this.roleArray = this.service.getRoleArray();
+
+    console.log(this.roleArray);
+  
   }
+
+  log(x:any){
+ 
+    console.log(x);
+  }
+
 
 }

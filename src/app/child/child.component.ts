@@ -4,6 +4,7 @@ import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@an
 import { Role } from 'src/model/Role';
 import { Employee } from 'src/model/Employee'
 import { RoleandemployeeService } from '../roleandemployee.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ChildComponent implements OnInit,OnChanges,DoCheck {
 
 
 
-  @Input() roleId:number=-1;
+  @Input() role:Role=new Role();
+  
 
   
   constructor(private service:RoleandemployeeService) {
@@ -24,24 +26,28 @@ export class ChildComponent implements OnInit,OnChanges,DoCheck {
 
    }
    
-  onlyActive:Employee[]|undefined;
+  onlyActive:Employee[]=[];
+  employeeArray:Employee[]=[];
    
 
   ngOnInit(): void {
+
+    this.employeeArray = this.service.getEmployeeData();
+    
   }
 
   ngOnChanges(changes:SimpleChanges)
   {
     
     
-
-    this.onlyActive =  this.service.employeeArray.filter((value:Employee)=>{
+    // console.log(changes.roleId.currentValue.roleId);
+    // this.onlyActive =  this.employeeArray.filter((value:Employee)=>{
 
      
-      return value.isActive && value.employeeRoleId.toString() === changes.roleId.currentValue;
-    })
+    //   return value.isActive && value.employeeRoleId.toString() === changes.roleId.currentValue.roleId;
+    // })
 
-    console.log(this.onlyActive);
+    // console.log(this.onlyActive);
 
     
 
@@ -51,13 +57,15 @@ export class ChildComponent implements OnInit,OnChanges,DoCheck {
   {
     
     
-    // this.onlyActive =  this.service.employeeArray.filter((value:Employee)=>{
+    
+    this.onlyActive =  this.service.employeeArray.filter((value:Employee)=>{
+
+
+           
+      return value.isActive && value.employeeRoleId == this.role.roleId;
+    })
 
      
-    //   return value.isActive && value.employeeRoleId == this.roleId;
-    // })
-
-    // console.log(this.onlyActive);
 
   }
 
