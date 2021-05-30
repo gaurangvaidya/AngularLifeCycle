@@ -1,0 +1,18 @@
+
+
+<div>
+    <button (click)="changeColor()">Change Color ViewChild</button>
+    
+    <button (click)="changeColorContentDiv()">Change Color ContentChild</button>
+</div>
+<div #viewDiv>
+    This Is View Div
+</div>
+
+<ng-content>
+
+</ng-content>
+
+<div *appMyngif="true">
+    <h1>Using Custom Ng IF </h1>
+</div>
